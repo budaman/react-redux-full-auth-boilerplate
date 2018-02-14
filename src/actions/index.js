@@ -1,4 +1,4 @@
-import { setItem, removeItem } from "chocolata";
+import { setItem, getItem, removeItem } from "chocolata";
 
 import axios from "axios";
 import { AUTH_USER, AUTH_ERROR, UNAUTH_USER } from "./types";
@@ -46,5 +46,17 @@ export function authError(error) {
   return {
     type: AUTH_ERROR,
     payload: error
+  };
+}
+
+export function fetchMessage() {
+  return function(dispatch) {
+    axios
+      .get(ROOT_URL, {
+        headers: { authorization: getItem("token") }
+      })
+      .then(response => {
+        console.log(response);
+      });
   };
 }
