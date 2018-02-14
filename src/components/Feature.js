@@ -11,11 +11,14 @@ class Feature extends Component {
     return (
       <div>
         <Header />
-        WOW, SUPER SUPER SECRET PAGE IS LOADED. ONLY YOU CAN SEE IT!!! WOW WOW
-        WOW
+        {this.props.message}
       </div>
     );
   }
 }
 
-export default connect(null, actions)(Feature);
+function mapStateToProps(state) {
+  return { message: state.auth.message };
+}
+
+export default connect(mapStateToProps, actions)(Feature);
